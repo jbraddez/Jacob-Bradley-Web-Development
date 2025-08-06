@@ -1,0 +1,15 @@
+main{
+    margin: 7rem auto 3rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    gap: 0.5rem;
+}
+
+main p{
+    margin-bottom: 1rem;
+}
+
+main a{
+    color: rgb(28, 150, 211);
+}
