@@ -1,11 +1,11 @@
 {
   "rewrites": [
-    { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/index", "destination": "/", "permanent": true },
-    { "source": "/contact", "destination": "/contact.html", "permanent": true },
-    { "source": "/services", "destination": "/services.html", "permanent": true },
-    { "source": "/work", "destination": "/work.html", "permanent": true },
-    { "source": "/privacy-policy", "destination": "/privacy-policy.html", "permanent": true },
-    { "source": "/terms-of-service", "destination": "/terms-of-service.html", "permanent": true }
+    { "source": "/home", "destination": "/" },
+    { "source": "/index", "destination": "/" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/work", "destination": "/work.html" },
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/terms-of-service", "destination": "/terms-of-service.html" }
   ]
 }
