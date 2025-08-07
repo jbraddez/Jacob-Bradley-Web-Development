@@ -1,16 +1,5 @@
 {
   "redirects": [
-    {
-      "source": "http://jacobbradley.co.uk",
-      "destination": "https://jacobbradley.co.uk",
-      "has": [
-        {
-          "type": "host",
-          "value": "jacobbradley.co.uk"
-        }
-      ],
-      "permanent": true
-    },
     { "source": "/home", "destination": "/", "permanent": true },
     { "source": "/index", "destination": "/", "permanent": true },
     { "source": "/contact", "destination": "/contact.html", "permanent": true },
