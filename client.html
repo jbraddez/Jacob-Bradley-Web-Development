@@ -50,11 +50,12 @@
         <div class="footer"> 
             <p><span id="number">No</span> files selected</p> 
         </div> 
-        <input id="file" multiple type="file"> 
+        <input id="file" name="file" required multiple type="file"> 
         </label>
         <button class="submit" type="submit">Upload</button>
         </form>
 
+        <p id="success">Thank you, your message has been sent successfully!</p>
         <p id="status"></p>
     </main>
 
@@ -76,30 +77,50 @@
     </footer>
     <script src="/script.js"></script>
      <script>
-    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const file = form.file.files[0];
-    const reader = new FileReader();
+        const fileInput = document.getElementById('file');
+        const numberSpan = document.getElementById('number');
 
-    reader.onload = async function() {
-        const base64Data = reader.result.split(',')[1];
-        const data = new URLSearchParams();
-        data.append('clientName', form.clientName.value);
-        data.append('fileName', file.name);
-        data.append('mimeType', file.type);
-        data.append('fileContent', base64Data);
-
-        const res = await fetch('https://script.google.com/macros/s/AKfycbxbYkKtACVPZWQ3Q9F5XT3jurHEXg4xxCCNHfxAmUkYRji7GrYQTx5wZZHQRk8P_0w04Q/exec', {
-        method: 'POST',
-        body: data
+        fileInput.addEventListener('change', () => {
+        const count = fileInput.files.length;
+        numberSpan.textContent = count === 0 ? "No" : count;
         });
 
-        document.getElementById('status').innerText = await res.text();
-    };
+  document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const file = form.file.files[0];
+  const reader = new FileReader();
 
-    reader.readAsDataURL(file);
-    });
+  reader.onload = async function() {
+    document.getElementById('submit').textContent = 'Please Wait';
+    const base64Data = reader.result.split(',')[1];
+    const data = new URLSearchParams();
+    data.append('clientName', form.clientName.value);
+    data.append('fileName', file.name);
+    data.append('mimeType', file.type);
+    data.append('fileContent', base64Data);
+
+    try {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbyAFp50KpJ0DV4qcuZvS-eS4pH2jtb1_LorYi3Ms4p-h83gU2XcOOCkDzQHutST2XV27Q/exec', {
+        method: 'POST',
+        body: data
+      });
+      const text = await res.text();
+      if (text.toLowerCase().includes('success')) {
+        document.getElementById('success').style.display = 'block';
+        form.querySelector('button[type="submit"]').style.display = 'none';
+        document.getElementById('status').innerText = '';
+      } else {
+        document.getElementById('status').innerText = text;
+      }
+    } catch (error) {
+      document.getElementById('status').innerText = 'Upload failed: ' + error.message;
+    }
+  };
+
+  reader.readAsDataURL(file);
+});
+
     </script>
 </body>
 </html>

@@ -73,13 +73,13 @@ form button:focus {
     margin: 15px auto 0;
 }
 
-#alert-quote {
+#alert-quote,#alert {
     background-color: #d32f2f;
     color: #ffffff;
     border: 1px solid #b71c1c;
 }
 
-#success-quote {
+#success-quote,#success {
     background-color: #388e3c;
     color: #ffffff;
     border: 1px solid #2e7d32;
