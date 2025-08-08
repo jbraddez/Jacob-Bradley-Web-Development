@@ -94,25 +94,21 @@
         data.append('business', form.business.value);
         data.append('changes', form.changes.value);
 
-        fetch('https://script.google.com/macros/s/AKfycbwUy5Kl1feMTKHt-KzwsN_LmUoSHZgfje9BPfHVD0nvStwqq7HlfTT-03V8XrIvdFup/exec', {
-            method: 'POST',
-            body: data
+        fetch("https://script.google.com/macros/s/AKfycbwMjtjx8ws_1bESfQpEs5j5Ei8nVzgJB0XwTbbRhf07jcCABjTp4qCQ5s1QedI7aVs/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ photos: selected })
         })
-        .then(res => res.text())
-        .then(text => {
-        document.getElementById('submit-btn').style.display = 'none';
-            if (text.toLowerCase().includes('success')) {
-            document.getElementById('success').style.display = 'block';
-            document.getElementById('alert').style.display = 'none';
-            } else {
-            document.getElementById('alert').style.display = 'block';
-            document.getElementById('success').style.display = 'none';
-            }
+        .then(res => res.json())
+        .then(data => {
+        if (data.status === "success") {
+            console.log("Vote saved");
+        } else {
+            console.error(data.message);
+        }
         })
-        .catch(() => {
-            document.getElementById('alert').style.display = 'block';
-            document.getElementById('success').style.display = 'none';
-        });
+        .catch(err => console.error("Error:", err));
+
         });
     </script>
 
