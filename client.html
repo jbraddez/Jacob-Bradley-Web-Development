@@ -52,7 +52,7 @@
         </div> 
         <input id="file" name="file" required multiple type="file"> 
         </label>
-        <button class="submit" type="submit">Upload</button>
+        <button id="submit" class="submit" type="submit">Upload</button>
         </form>
 
         <p id="success">Thank you, your message has been sent successfully!</p>
@@ -87,12 +87,13 @@
 
   document.getElementById('uploadForm').addEventListener('submit', async function(e) {
   e.preventDefault();
+    document.getElementById('submit').textContent = 'Please Wait';
   const form = e.target;
   const file = form.file.files[0];
   const reader = new FileReader();
 
+
   reader.onload = async function() {
-    document.getElementById('submit').textContent = 'Please Wait';
     const base64Data = reader.result.split(',')[1];
     const data = new URLSearchParams();
     data.append('clientName', form.clientName.value);
