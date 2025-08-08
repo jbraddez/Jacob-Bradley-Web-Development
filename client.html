@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client | Jacob Bradley Web Development</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/client.css">
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="robots" content="follow,noindex">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SJP2G0943S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SJP2G0943S');
+</script>
+</head>
+<body>
+
+    <header>
+        <a class="logo" href="/">JB</a>
+        <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="primary-navigation" role="navigation">
+            <a href="/">Home</a>
+            <a href="/work">Work</a>
+            <a href="/services">Services</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Client Media Upload Form</h1>
+        <form id="uploadForm">
+        <input type="text" name="clientName" placeholder="Your Business" required>
+        <!-- From Uiverse.io by Yaya12085 --> 
+        <label for="file"  class="container"> 
+        <div class="header"> 
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
+            <path d="M7 10V9C7 6.23858 9.23858 4 12 4C14.7614 4 17 6.23858 17 9V10C19.2091 10 21 11.7909 21 14C21 15.4806 20.1956 16.8084 19 17.5M7 10C4.79086 10 3 11.7909 3 14C3 15.4806 3.8044 16.8084 5 17.5M7 10C7.43285 10 7.84965 10.0688 8.24006 10.1959M12 12V21M12 12L15 15M12 12L9 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> <p>Browse Files to upload!</p>
+        </div> 
+        <div class="footer"> 
+            <p><span id="number">No</span> files selected</p> 
+        </div> 
+        <input id="file" multiple type="file"> 
+        </label>
+        <button class="submit" type="submit">Upload</button>
+        </form>
+
+        <p id="status"></p>
+    </main>
+
+    <footer>
+        <div class="left">
+            <img src="/images/logo.png" alt="Jacob Bradley Web Development Logo">
+            <p>Jacob Bradley <span class="newline">Web Development</span></p>
+        </div>
+        <nav class="secondary-navigation" role="navigation">
+            <a href="/">Home</a>
+            <a href="/work">Work</a>
+            <a href="/services">Services</a>
+            <a href="/contact">Contact</a>
+        </nav>
+        <div class="right">
+            <a href="/terms-of-service">Terms of Service</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+    </footer>
+    <script src="/script.js"></script>
+     <script>
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const file = form.file.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async function() {
+        const base64Data = reader.result.split(',')[1];
+        const data = new URLSearchParams();
+        data.append('clientName', form.clientName.value);
+        data.append('fileName', file.name);
+        data.append('mimeType', file.type);
+        data.append('fileContent', base64Data);
+
+        const res = await fetch('https://script.google.com/macros/s/AKfycbxbYkKtACVPZWQ3Q9F5XT3jurHEXg4xxCCNHfxAmUkYRji7GrYQTx5wZZHQRk8P_0w04Q/exec', {
+        method: 'POST',
+        body: data
+        });
+
+        document.getElementById('status').innerText = await res.text();
+    };
+
+    reader.readAsDataURL(file);
+    });
+    </script>
+</body>
+</html>

@@ -19,7 +19,7 @@ form label {
     font-weight: 500;
 }
 
-form input, form textarea {
+form input, form textarea,form select {
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #cccccc;
@@ -29,7 +29,7 @@ form input, form textarea {
     transition: all 0.3s ease;
 }
 
-form input:focus, form textarea:focus {
+form input:focus, form textarea:focus,form select:focus {
     outline: none;
     border-color: #3f6df0;
     background: #e6eaff;
@@ -61,7 +61,7 @@ form button:focus {
     box-shadow: 0 0 10px rgba(63, 109, 240, 0.7);
 }
 
-#alert, #success {
+#alert, #success, #alert-quote, #success-quote {
     display: none;
     opacity: 0;
     padding: 15px;
@@ -73,14 +73,30 @@ form button:focus {
     margin: 15px auto 0;
 }
 
-#alert {
+#alert-quote {
     background-color: #d32f2f;
     color: #ffffff;
     border: 1px solid #b71c1c;
 }
 
-#success {
+#success-quote {
     background-color: #388e3c;
     color: #ffffff;
     border: 1px solid #2e7d32;
 }
+
+ .formsection{
+    text-align: center;
+    margin: 3rem 0;
+    padding: 0 0.5rem;
+}
+.note{
+    color: rgb(239, 28, 28);
+    font-size: small;
+    margin: 0.5rem;
+}
+
+form select,form input::placeholder, form textarea::placeholder{
+    color: #666;
+}
+    
