@@ -86,3 +86,50 @@ label{
     color: #ffffff;
     border: 1px solid #2e7d32;
 }
+
+.services-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 6rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.service-card {
+  background: #fff;
+  border-left: 5px solid #6cf;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(40px);
+  text-decoration: none;
+}
+.service-card h2 {
+  font-family: "Montserrat", sans-serif;
+  color: #6cf;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+.service-card p {
+  color: #333;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  .services-wrapper {
+    gap: 3rem;
+    padding: 4rem 1rem;
+  }
+  .service-card h2 {
+    font-size: 1.5rem;
+  }
+}

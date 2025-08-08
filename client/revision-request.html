@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revision Request | Jacob Bradley Web Development</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png">
+    <link rel="icon" href="/favicon.ico">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SJP2G0943S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SJP2G0943S');
+</script>
+</head>
+<body>
+
+    <header>
+        <a class="logo" href="/">JB</a>
+        <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="primary-navigation" role="navigation">
+            <a href="/">Home</a>
+            <a href="/work">Work</a>
+            <a href="/services">Services</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+   <main>
+    <h1>Revision Request Form</h1>
+    <form id="contact-form" onsubmit="event.preventDefault(); sendEmail();">
+        <input required type="text" id="comment" placeholder="Your Business">
+        <label for="comment"><p>What changes would you like?</p> <p style="font-size: small;margin-top: 0.2rem;">Please go into as much detail as possible</p></label>
+        <textarea style="transition: none;" required type="textarea" a id="name" placeholder="e.g. I'd rather a lighter theme, preferably containing blue. Also..."></textarea>
+
+        <button id="submit-btn" class="cta" type="submit" value="Send">Submit</button>
+    </form>
+    <p id="alert">Sorry, an error occurred.</p>
+    <p id="success">Thank you, your message has been sent successfully!</p>
+   </main>
+
+    <footer>
+        <div class="left">
+            <img src="/images/logo.png" alt="Jacob Bradley Web Development Logo">
+            <p>Jacob Bradley <span class="newline">Web Development</span></p>
+        </div>
+        <nav class="secondary-navigation" role="navigation">
+            <a href="/">Home</a>
+            <a href="/work">Work</a>
+            <a href="/services">Services</a>
+            <a href="/contact">Contact</a>
+        </nav>
+        <div class="right">
+            <a href="/terms-of-service">Terms of Service</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+    </footer>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init({
+            publicKey: "zvmmGxMyDrEtqFckm",
+            });
+        })();
+    </script>
+    <script src="/script.js"></script>
+  <script>
+
+  </script>
+</body>
+</html>

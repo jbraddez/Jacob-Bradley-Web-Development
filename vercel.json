@@ -5,7 +5,8 @@
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/services", "destination": "/services.html" },
     { "source": "/work", "destination": "/work.html" },
-    { "source": "/client", "destination": "/client.html" },
+    { "source": "/client/client-upload", "destination": "/client/client-upload.html" },
+    { "source": "/client/revision-request", "destination": "/client/revision-request.html" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
     { "source": "/terms-of-service", "destination": "/terms-of-service.html" }
   ]

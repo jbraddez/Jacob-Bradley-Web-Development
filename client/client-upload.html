@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client | Jacob Bradley Web Development</title>
+    <title>Media Upload | Jacob Bradley Web Development</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/css/contact.css">
     <link rel="stylesheet" href="/css/client.css">
@@ -78,49 +78,57 @@
     <script src="/script.js"></script>
      <script>
         const fileInput = document.getElementById('file');
-        const numberSpan = document.getElementById('number');
+const numberSpan = document.getElementById('number');
 
-        fileInput.addEventListener('change', () => {
-        const count = fileInput.files.length;
-        numberSpan.textContent = count === 0 ? "No" : count;
-        });
+fileInput.addEventListener('change', () => {
+  const count = fileInput.files.length;
+  numberSpan.textContent = count === 0 ? "No" : count;
+});
 
-  document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+document.getElementById('uploadForm').addEventListener('submit', async function (e) {
   e.preventDefault();
-    document.getElementById('submit').textContent = 'Please Wait';
+  document.getElementById('submit').textContent = 'Please Wait';
+  
   const form = e.target;
-  const file = form.file.files[0];
-  const reader = new FileReader();
+  const files = form.file.files;
+  const data = new URLSearchParams();
+  
+  data.append('clientName', form.clientName.value);
 
-
-  reader.onload = async function() {
-    const base64Data = reader.result.split(',')[1];
-    const data = new URLSearchParams();
-    data.append('clientName', form.clientName.value);
+  for (let file of files) {
+    const base64 = await fileToBase64(file);
     data.append('fileName', file.name);
     data.append('mimeType', file.type);
-    data.append('fileContent', base64Data);
+    data.append('fileContent', base64.split(',')[1]);
+  }
 
-    try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbyAFp50KpJ0DV4qcuZvS-eS4pH2jtb1_LorYi3Ms4p-h83gU2XcOOCkDzQHutST2XV27Q/exec', {
-        method: 'POST',
-        body: data
-      });
-      const text = await res.text();
-      if (text.toLowerCase().includes('success')) {
-        document.getElementById('success').style.display = 'block';
-        form.querySelector('button[type="submit"]').style.display = 'none';
-        document.getElementById('status').innerText = '';
-      } else {
-        document.getElementById('status').innerText = text;
-      }
-    } catch (error) {
-      document.getElementById('status').innerText = 'Upload failed: ' + error.message;
+  try {
+    const res = await fetch('https://script.google.com/macros/s/AKfycbybuHgkXjGJwgVdNOYklyDh914n1QwOn0zi02M8lkC3_CEt2gUfbQWb17u4aJeRa87NCQ/exec', {
+      method: 'POST',
+      body: data
+    });
+    const text = await res.text();
+    if (text.toLowerCase().includes('success')) {
+      document.getElementById('success').style.display = 'block';
+      form.querySelector('button[type="submit"]').style.display = 'none';
+      document.getElementById('status').innerText = '';
+      numberSpan.innerText = 'No';
+    } else {
+      document.getElementById('status').innerText = text;
     }
-  };
-
-  reader.readAsDataURL(file);
+  } catch (error) {
+    document.getElementById('status').innerText = 'Upload failed: ' + error.message;
+  }
 });
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
     </script>
 </body>
