@@ -78,17 +78,9 @@
      <div class="web">
         <p>Web Development Based in Darlington</p>
     </div>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init({
-            publicKey: "zvmmGxMyDrEtqFckm",
-            });
-        })();
-    </script>
     <script src="/script.js"></script>
     <script>
-        document.getElementById('revision-form').addEventListener('submit', function(e) {
+         document.getElementById('revision-form').addEventListener('submit', function(e) {
         e.preventDefault();
         document.getElementById('submit-btn').textContent = "Please Wait";
 
@@ -97,22 +89,20 @@
         data.append('business', form.business.value);
         data.append('changes', form.changes.value);
 
-        fetch("https://script.google.com/macros/s/AKfycbwMjtjx8ws_1bESfQpEs5j5Ei8nVzgJB0XwTbbRhf07jcCABjTp4qCQ5s1QedI7aVs/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ photos: selected })
+        fetch("https://script.google.com/macros/s/AKfycbwUy5Kl1feMTKHt-KzwsN_LmUoSHZgfje9BPfHVD0nvStwqq7HlfTT-03V8XrIvdFup/exec", {
+          method: "POST",
+          body: data
         })
-        .then(res => res.json())
-        .then(data => {
-        if (data.status === "success") {
-            console.log("Vote saved");
-        } else {
-            console.error(data.message);
-        }
+        .then(res => res.text())
+        .then(response => {
+          if (response === "success") {document.getElementById('submit-btn').textContent = "Sent!";document.getElementById('success').style.display='block';
+          } else {
+           document.getElementById('success').style.display='block';
+          }
         })
-        .catch(err => console.error("Error:", err));
+        .catch(document.getElementById('success').style.display='block');
+      });
 
-        });
     </script>
 
 
